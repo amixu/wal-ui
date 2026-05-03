@@ -1,0 +1,182 @@
+:root {
+  /*
+    Color system (OKLCH-first):
+    - Slight cool tint in neutrals for "enterprise dashboard" clarity.
+    - Keep existing brand direction (blue) but normalize hover/pressed and focus ring.
+  */
+  --c-bg: oklch(0.985 0.006 265);
+  --c-surface: oklch(0.992 0.004 265);
+  --c-surface-2: oklch(0.975 0.008 265);
+
+  /*项目字体默认颜色，其他所有灰色系颜色都是基于该颜色调整透明度*/
+  --c-text: oklch(0.18 0.02 265);
+  --c-text-2: color-mix(in oklab, var(--c-text) 72%, transparent);
+  /*用于副标题或者描述类文本*/
+  --c-text-3: color-mix(in oklab, var(--c-text) 50%, transparent);
+
+  --c-line: color-mix(in oklab, var(--c-text) 12%, transparent);
+  --c-line-strong: color-mix(in oklab, var(--c-text) 18%, transparent);
+
+  /* 主题色浅色系，一般用于边框颜色或背景色 */
+  --c-primary-soft: color-mix(in oklab, var(--c-primary) 15%, transparent);
+  /* 带阴影 */
+  --shadow-1: 0 2px 8px color-mix(in oklab, var(--c-text) 5%, transparent);
+  /* 带明显阴影 */
+  --shadow-2: 0 10px 28px color-mix(in oklab, var(--c-text) 8%, transparent);
+
+  /* ---------- Spacing scale (use tokens, not arbitrary px) ---------- */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 20px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+
+  /* ---------- Radius scale ---------- */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-pill: 999px;
+
+  /* ---------- Typography scale ---------- */
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-md: 14px;
+  --text-lg: 16px;
+  --text-xl: 18px;
+}
+
+/* Firefox scrollbar */
+* {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--c-text) 25%, transparent) transparent;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--c-text);
+}
+
+/* ---------- Smooth scroll ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:
+    'Space Grotesk',
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  font-size: var(--text-md);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- Global transitions (subtle for UI elements) ---------- */
+/* Applied only to interaction-related properties */
+a,
+button,
+[role='button'] {
+  transition-property: background-color, border-color, color, opacity, box-shadow, transform;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Subtle global link styling (Naive buttons are unaffected) */
+a {
+  color: color-mix(in oklab, var(--c-primary) 86%, black);
+  text-underline-offset: 3px;
+}
+a:hover {
+  color: color-mix(in oklab, var(--c-primary) 92%, black);
+}
+
+:where(.n-popover):has(.ui-panel) {
+  padding: 0 !important;
+}
+
+:where(.n-button):hover {
+  transform: translateY(-1px);
+}
+
+.ui-wrapper,
+.ui-panel-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* ---------- Global UI primitives (reduce per-page duplicated CSS) ---------- */
+.ui-panel,
+.ui-panel-wrapper {
+  background: linear-gradient(180deg, var(--c-surface) 0%, var(--c-surface-2) 100%);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  padding: var(--space-md);
+  box-shadow: var(--shadow-1);
+}
+
+.text-primary {
+  color: var(--c-primary);
+}
+.text-error {
+  color: var(--c-error);
+}
+.text-warning {
+  color: var(--c-warning);
+}
+.text-success {
+  color: var(--c-success);
+}
+
+.text-sub,
+.text-sub-xs,
+.text-sub-sm {
+  color: var(--c-text-3);
+}
+.text-sub-xs {
+  font-size: var(--text-xs);
+}
+.text-sub-sm {
+  font-size: var(--text-sm);
+}
+
+/* ---------- Enhanced scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--c-text) 20%, transparent) 0%,
+    color-mix(in oklab, var(--c-text) 30%, transparent) 100%
+  );
+  border-radius: var(--radius-pill);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--c-text) 30%, transparent) 0%,
+    color-mix(in oklab, var(--c-text) 40%, transparent) 100%
+  );
+  background-clip: padding-box;
+}
