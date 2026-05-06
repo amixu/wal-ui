@@ -13,7 +13,7 @@
 <script setup lang="ts">
 withDefaults(
   defineProps<{
-    backgroundType?: 'light' | 'primary' | 'darkBlue' | 'black';
+    backgroundType?: 'light' | 'primary' | 'deep';
   }>(),
   {
     backgroundType: 'light'
@@ -35,32 +35,19 @@ withDefaults(
   padding: 0 var(--space-md);
 
   &.primary,
-  &.darkBlue,
-  &.black {
+  &.deep {
     color: white;
   }
   &.primary {
-    background: linear-gradient(
-      180deg,
-      color-mix(in oklab, var(--c-primary) 92%, white) 0%,
-      color-mix(in oklab, var(--c-primary) 78%, black) 100%
-    );
+    background: var(--c-primary);
   }
-  &.darkBlue {
-    background: linear-gradient(
-      180deg,
-      color-mix(in oklab, #002559 92%, white) 0%,
-      color-mix(in oklab, #002559 78%, black) 100%
-    );
-  }
-  &.black {
-    background: linear-gradient(180deg, #293247 0%, #1c2333 100%);
+  &.deep {
+    background: color-mix(in oklab, #002559 92%, white);
   }
 }
 .scdb__top-left,
 .scdb__top-right {
   display: flex;
-
   align-items: center;
 }
 

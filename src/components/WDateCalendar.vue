@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { formatDateTime, type DateCellMeta } from '../utils';
 import { getFestival, isAdditionalWorkday, isHoliday } from 'chinese-workday';
 import { NConfigProvider } from 'naive-ui';
 import solarLunar from 'solarlunar';
 import { computed, ref } from 'vue';
+import { formatDateTime, type DateCellType } from '../utils';
 
 const props = withDefaults(
   defineProps<{
     modelValue: number | undefined;
     placeholder?: string;
-    cellMetaByKey?: Record<string, DateCellMeta>;
+    cellMetaByKey?: Record<string, DateCellType>;
     cnHolidayMarks?: boolean;
     clearable?: boolean;
   }>(),
@@ -48,7 +48,7 @@ function prevKeyOf(key: string) {
   return formatDateTime(d, 'date');
 }
 
-function cnDefaultMetaForCell(key: string): DateCellMeta | undefined {
+function cnDefaultMetaForCell(key: string): DateCellType | undefined {
   if (!props.cnHolidayMarks) return undefined;
 
   // chinese-workday 数据覆盖有限年份；超出范围直接不标记
@@ -87,7 +87,7 @@ function cnDefaultMetaForCell(key: string): DateCellMeta | undefined {
   return undefined;
 }
 
-function metaForCell(year: number, month: number, date: number): DateCellMeta | undefined {
+function metaForCell(year: number, month: number, date: number): DateCellType | undefined {
   const key = toKey(year, month, date);
   // 外部传入优先（可覆盖默认“假/班”）
   return props.cellMetaByKey[key] ?? cnDefaultMetaForCell(key);

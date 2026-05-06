@@ -45,25 +45,28 @@
   --text-md: 14px;
   --text-lg: 16px;
   --text-xl: 18px;
+
+  /* Scrollbar (Firefox + gradient stops for WebKit) */
+  --scrollbar-thumb: color-mix(in oklab, var(--c-text) 25%, transparent);
+  --scroll-thumb-a: color-mix(in oklab, var(--c-text) 20%, transparent);
+  --scroll-thumb-b: color-mix(in oklab, var(--c-text) 30%, transparent);
 }
 
-/* Firefox scrollbar */
 * {
   box-sizing: border-box;
   scrollbar-width: thin;
-  scrollbar-color: color-mix(in oklab, var(--c-text) 25%, transparent) transparent;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  color: var(--c-text);
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  color: var(--c-text);
-}
-
-/* ---------- Smooth scroll ---------- */
-html {
-  scroll-behavior: smooth;
 }
 
 body {
@@ -78,16 +81,6 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* ---------- Global transitions (subtle for UI elements) ---------- */
-/* Applied only to interaction-related properties */
-a,
-button,
-[role='button'] {
-  transition-property: background-color, border-color, color, opacity, box-shadow, transform;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Subtle global link styling (Naive buttons are unaffected) */
@@ -107,21 +100,49 @@ a:hover {
   transform: translateY(-1px);
 }
 
-.ui-wrapper,
+.flex-c,
+.flex-s,
+.flex-e,
+.flex-between {
+  display: flex;
+}
+
+.flex-c {
+  align-items: center;
+}
+
+.flex-s {
+  align-items: flex-start;
+}
+
+.flex-e {
+  align-items: flex-end;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.flex-column,
+.ui-main-wrapper,
 .ui-panel-wrapper {
   display: flex;
   flex-direction: column;
+}
+
+.ui-main-wrapper {
+  padding: var(--space-lg);
   gap: var(--space-lg);
 }
 
-/* ---------- Global UI primitives (reduce per-page duplicated CSS) ---------- */
 .ui-panel,
 .ui-panel-wrapper {
+  padding: var(--space-md);
+  gap: var(--space-md);
   background: linear-gradient(180deg, var(--c-surface) 0%, var(--c-surface-2) 100%);
   border: 1px solid var(--c-line);
   border-radius: var(--radius-md);
   overflow: hidden;
-  padding: var(--space-md);
   box-shadow: var(--shadow-1);
 }
 
@@ -162,21 +183,13 @@ a:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklab, var(--c-text) 20%, transparent) 0%,
-    color-mix(in oklab, var(--c-text) 30%, transparent) 100%
-  );
+  background: linear-gradient(180deg, var(--scroll-thumb-a) 0%, var(--scroll-thumb-b) 100%);
   border-radius: var(--radius-pill);
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklab, var(--c-text) 30%, transparent) 0%,
-    color-mix(in oklab, var(--c-text) 40%, transparent) 100%
-  );
-  background-clip: padding-box;
+  --scroll-thumb-a: color-mix(in oklab, var(--c-text) 30%, transparent);
+  --scroll-thumb-b: color-mix(in oklab, var(--c-text) 40%, transparent);
 }

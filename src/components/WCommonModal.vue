@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import WActionButton from './WActionButton.vue';
-import type { ActionButtonType } from '../utils';
 import { NModal } from 'naive-ui';
+import type { ActionButtonType } from '../utils';
+import WActionButton from './WActionButton.vue';
 
 const _props = withDefaults(
   defineProps<{

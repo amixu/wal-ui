@@ -6,6 +6,10 @@ import type { GlobalThemeOverrides } from 'naive-ui';
 /** 表单控件与按钮统一圆角（通过主题变量注入，全站生效） */
 const controlBorderRadius = '16px';
 
+/**
+ * Naive UI 全局 `themeOverrides`：色板、圆角、字体与常用组件 token 集中在此，供 `NConfigProvider` 使用。
+ * 注意：`common` 内色值须为可解析颜色字符串，勿写 `var(--x)`（Naive 内部解析不支持）。
+ */
 export const naiveUiThemeOverrides: GlobalThemeOverrides = {
   common: {
     primaryColor: '#0053E2',
@@ -85,6 +89,9 @@ export const naiveUiThemeOverrides: GlobalThemeOverrides = {
   }
 };
 
+/**
+ * 将主题中的主色 / 成功 / 警告 / 错误同步到 `document.documentElement` 的 CSS 变量（`--c-primary` `--c-success` `--c-warning` `--c-error`），便于非 Naive 区域复用色板。
+ */
 export function syncThemeColorsToCssVars() {
   const rootStyle = document.documentElement.style;
   const common = naiveUiThemeOverrides.common;

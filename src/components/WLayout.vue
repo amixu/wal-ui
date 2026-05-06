@@ -91,8 +91,7 @@ const sideWidth = props.sideWidth;
 }
 
 .layout-wrap__left > .logo {
-  padding: 16px 0 0 20px;
-  height: 60px;
+  padding: 12px 0 12px 20px;
   box-sizing: border-box;
 }
 
@@ -100,7 +99,7 @@ const sideWidth = props.sideWidth;
   flex: 1 1 auto;
   min-height: 0;
   overflow: auto;
-  padding: 10px 8px 12px;
+  padding: 10px 0;
 }
 
 .layout-wrap__right {
@@ -115,17 +114,9 @@ const sideWidth = props.sideWidth;
   flex: 1;
   min-width: 0;
   min-height: 0;
-  padding: 20px;
   overflow: auto;
   box-sizing: border-box;
   background: var(--c-bg);
-}
-
-.layout-wrap__right > .content :deep(> *) {
-  flex: 1 1 auto;
-  min-height: 0;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .layout-wrap__content {
