@@ -87,7 +87,7 @@ export const baseUrlOption: DomainEnvType = {
  * - `[DomainKeyType, EnvKeyType]`：二元组 `[domainKey, envKey]`
  *
  * 注意事项：
- * - 推断规则按优先级执行：本地开发 -> 外网域 -> qacanary 特例 -> 常规环境 -> prod 兜底
+ * - 推断规则按优先级执行：本地开发 -> 外网域 -> 常规环境 -> prod 兜底
  * - 当路径或域名无法匹配到候选环境时，会回退为 `prod`
  */
 export function getEnvByWebUrl(): [DomainKeyType, EnvKeyType] {
