@@ -1,18 +1,19 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue';
+import { NButton } from 'naive-ui';
+import { computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import {
   findMenuLabelChain,
   normalizeHashPath,
   resolveActiveMenuPath
 } from '../composables/useMenuRouting';
 import type { MenuNodeType } from '../utils';
-import { Icon } from '@iconify/vue';
-import { NButton } from 'naive-ui';
-import { computed } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
 
 const props = defineProps<{
   menuOptions: MenuNodeType[];
   onDark?: boolean;
+  authList?: Record<string, string>[] | undefined;
 }>();
 
 const route = useRoute();
@@ -27,7 +28,7 @@ const breadcrumbs = computed(() => {
   const currentMenuPath = resolveActiveMenuPath(props.menuOptions, route.path, route.hash);
   const result = findMenuLabelChain(props.menuOptions, currentMenuPath);
   if (hashPath) {
-    result?.push('成员');
+    result?.push(props.authList?.find(item => item.url === hashPath)?.name || '子页面');
   }
   return result;
 });
